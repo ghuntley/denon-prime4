@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 log() {
   echo "$@" >&2
@@ -18,6 +18,19 @@ files=( $(find . unpacked-img -mindepth 1 -maxdepth 1 -name \*.dts ) )
 if [ "${#files[@]}" -lt 1 ]; then
   log_fatal "Need at least one .dts file to process in either the current working directory or ./unpacked-img/."
 fi
+
+files_to_delete=()
+on_exit() {
+  for file in "${files_to_delete[@]}"; do
+    rm -f "${file}"
+  done
+}
+trap 'on_exit' EXIT
+for img in unpacked-img/*.img; do
+  log "*** Compressing $img to $img.xz"
+  xz -v9eT0k "$img"
+  files_to_delete+=("$img.xz")
+done
 
 for file in "${files[@]}"; do
   dtb="$(basename "$file" .dts).dtb"
