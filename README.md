@@ -1,6 +1,6 @@
 # denon prime4 firmware research
 
-## extracting the image
+## inspecting the firmware
 
 ```
 $ file PRIME4-2.2.1-Update.img 
@@ -11,6 +11,7 @@ PRIME4-2.2.1-Update.img: Device Tree Blob version 17, size=141671335, boot CPU=0
 
 ```
 $ brew install u-boot-tools
+$ sudo apt-get install u-boot-tools
 ```
 
 ```
@@ -42,3 +43,31 @@ Created:         Wed May 18 07:14:06 2022
   Hash algo:    sha1
   Hash value:   e845bd36f1be5368fb0d5b113f0ca68a5e949aa5
 ```
+
+### extracting the firmware
+
+```
+dumpimage -T flat_dt -p 0 -o splash.xz PRIME4-2.2.1-Update.img 
+dumpimage -T flat_dt -p 1 -o recovery.xz PRIME4-2.2.1-Update.img
+dumpimage -T flat_dt -p 2 -o rootfs.xz PRIME4-2.2.1-Update.img
+```
+
+```
+sudo apt-get install xz-utils p7zip e2tools
+```
+
+```
+xz -d splash.xz
+xz -d recovery.xz
+xz -d rootfs.xz
+```
+
+
+```
+$ e2ls rootfs
+bin          boot         dev          etc          home         lib          
+lib32        linuxrc      lost+found   media        mnt          opt          
+proc         root         run          sbin         srv          sys          
+tmp          usr          var          
+```
+
