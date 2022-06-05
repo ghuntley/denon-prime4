@@ -29,3 +29,5 @@ git init "buildroot/${VERSION_ID}"
   git fetch origin "refs/tags/${VERSION_ID}:refs/tags/${VERSION_ID}"
   git checkout "${VERSION_ID}"
 )
+
+cp -rv buildroot-config/. buildroot/"${VERSION_ID}"
