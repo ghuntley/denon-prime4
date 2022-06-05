@@ -1,5 +1,6 @@
 *.exe*
 *.img*
+buildroot/
 media/
 unpacked-img/
 updater/
