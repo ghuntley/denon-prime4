@@ -9,6 +9,34 @@ log_fatal() {
   exit 1
 }
 
+readonly=1
+
+while [ "$#" -gt 1 ]; do
+  case "$1" in
+  -w|--write)
+    shift 1
+    readonly=0
+    ;;
+  --)
+    shift 1
+    break
+    ;;
+  -*)
+    log_fatal "Unknown option: $1"
+    ;;
+  *)
+    break
+    ;;
+  esac
+done
+
+mount_options=""
+if [ "$readonly" -ne 0 ]
+then
+  mount_options="$mount_options,ro"
+fi
+mount_options="${mount_options#,}"
+
 if [ ! -f unpacked-img/rootfs.img ]; then
   log_fatal "You need to unpack the original firmware first (unpacked-img/rootfs.img seems to be missing)."
 fi
@@ -17,7 +45,7 @@ mkdir -p engineos media/az01-internal
 chmod 777 media/az01-internal
 # NOTE - potential backfiring possible if recursively unmounting /dev/
 trap 'umount engineos/dev; umount -R engineos' EXIT
-mount -o ro unpacked-img/rootfs.img engineos
+mount -o "$mount_options" unpacked-img/rootfs.img engineos
 mount --bind /dev engineos/dev
 mount --bind media engineos/media
 mount -t proc proc engineos/proc
