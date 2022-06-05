@@ -9,13 +9,13 @@ log_fatal() {
   exit 1
 }
 
-if [ ! -f rootfs.img ]; then
-  log_fatal "You need to unpack the original firmware first (rootfs.img seems to be missing)."
+if [ ! -f unpacked-img/rootfs.img ]; then
+  log_fatal "You need to unpack the original firmware first (unpacked-img/rootfs.img seems to be missing)."
 fi
 
 mkdir -p engineos media/az01-internal
 trap 'umount -R engineos' EXIT
-mount -o ro rootfs.img engineos
+mount -o ro unpacked-img/rootfs.img engineos
 mount --bind /dev engineos/dev
 mount --bind media engineos/media
 mount -t proc proc engineos/proc

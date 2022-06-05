@@ -31,11 +31,12 @@ fi
 
 for file in "${files[@]}"; do
   log "*** Unpacking $file"
+  mkdir -p unpacked-img
   dumpimage -l "$file"
-  dumpimage -T flat_dt -p 0 -o splash.img.xz "$file"
-  xz -vd splash.img.xz
-  dumpimage -T flat_dt -p 1 -o recoverysplash.img.xz "$file"
-  xz -vd recoverysplash.img.xz
-  dumpimage -T flat_dt -p 2 -o rootfs.img.xz "$file"
-  xz -vd rootfs.img.xz
+  dumpimage -T flat_dt -p 0 -o unpacked-img/splash.img.xz "$file"
+  xz -vd unpacked-img/splash.img.xz
+  dumpimage -T flat_dt -p 1 -o unpacked-img/recoverysplash.img.xz "$file"
+  xz -vd unpacked-img/recoverysplash.img.xz
+  dumpimage -T flat_dt -p 2 -o unpacked-img/rootfs.img.xz "$file"
+  xz -vd unpacked-img/rootfs.img.xz
 done
