@@ -18,6 +18,12 @@ fi
 
 files=( $(find -mindepth 1 -maxdepth 1 -name \*.img ) )
 
+# Replaces the full data string with a reference to the extracted image file.
+patch_dts() {
+  grep -v 'data = ' |\
+  sed 's,^\(\s\+\)partition = "\(.\+\)";$,\1partition = "\2";\n\1data = /incbin/("unpacked-img/\2.img");,g' -u
+}
+
 download_firmware() {
   log "*** Downloading ${prime4_update_download_filename}"
   curl '-#Lo' "${prime4_update_download_filename}" "${prime4_update_download_url}"
@@ -36,7 +42,7 @@ for file in "${files[@]}"; do
   #for dtb in unpacked-img/*.dtb; do
   for dtb in "$file"; do
     log "*** Converting $dtb to DTS"
-    dtc -I dtb -O dts "$dtb" > "$dtb.dts"
+    dtc -I dtb -O dts "$dtb" | patch_dts > "$dtb.dts"
 
     log "*** Unpacking $dtb"
     mkdir -p unpacked-img
