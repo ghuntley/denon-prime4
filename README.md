@@ -4,9 +4,10 @@
 
 * JC11 = Denon Prime 4 codename.
 * Effects unit / controller MIDI definitions are at https://github.com/ghuntley/denon-prime4/blob/trunk/engineos/usr/Engine/AssignmentFiles/PresetAssignmentFiles/JC11/JC11_Controller_Assignments.qml
-* static arm binaries for ssh / netcat at https://github.com/TheKikGen/MPC-LiveXplore
+* static arm binaries for ssh / netcat at https://github.com/TheKikGen/MPC-LiveXplore and https://github.com/TheKikGen/MPC-LiveXplore-bootstrap
 * repacking firmware at https://github.com/TheKikGen/MPC-LiveXplore/blob/master/imgmaker/mpcimg
 * engineos library format at https://github.com/mixxxdj/mixxx/wiki/Engine-Library-Format
+
 
 ## inspecting the firmware
 
