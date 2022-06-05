@@ -1,0 +1,12 @@
+[Unit]
+Description=Mount /media
+ConditionPathIsSymbolicLink=!/media
+DefaultDependencies=no
+Conflicts=umount.target
+Before=local-fs.target umount.target
+
+[Mount]
+What=tmpfs
+Where=/media
+Type=tmpfs
+Options=mode=1777,strictatime

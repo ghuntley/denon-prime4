@@ -1,0 +1,10 @@
+{
+	"version" : "00.55",
+	"filename" : "jp11_update_00_55_120596.dfu",
+	"type" : "dfu",
+	"alt-names" : [ "@Internal Flash  /0x08000000/04*016Kg,01*064Kg,01*128Kg"],
+	"start-sysex" : ["F0 00 02 0B 7F 0C 72 00 00 F7"],
+	"stop-command" : "dfu-util -a %alt% -S %serial% -s 0x08000000:1:leave -U %temp%",
+	"write-serial" : true,
+	"serial-sysex-start" : "F0 00 02 0B 00 0B 79 00 10"
+}

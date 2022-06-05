@@ -1,0 +1,6 @@
+#!/bin/sh
+
+printf '\n# Planck\n'
+cat /var/tmp/com.denondj.engine.version
+
+journalctl | zstd -c >"$AZ01_COREDUMP_DIR/$AZ01_COREDUMP_PREFIX".log.zst

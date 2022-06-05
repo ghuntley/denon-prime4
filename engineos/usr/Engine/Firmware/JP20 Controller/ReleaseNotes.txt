@@ -1,0 +1,76 @@
+================================================================================
+            Release notes for [JP20] SC LIVE 2
+================================================================================
+
+Version 1.0.0.29: 3/30/2022
+	+ Increase drive strength of I2S data lines to potentially fix audio pops
+	+ ETA5805 firmware version 1.1
+	+ TAS5805M firmware version 1.7 - JP20-85
+
+Version 1.0.0.27: 3/11/2022
+	+ TAS5805M firmware version 1.5
+
+Version 1.0.0.26: 3/4/2022
+	+ Fixed bug JP20-81: Mic1 doesn't work after leaving computer mode
+
+
+Version 1.0.0.25: 2/21/2022
+	+ Add support for ETA5805 amp chip and auto detect which one is installed.
+	+ ETA5805 firmware version 1.0
+	+ TAS5805M firmware version 1.4
+	+ Update product name
+
+
+Version 1.0.0.24: 1/26/2022
+	+ Changed meters to use bitwise OR'd values, JP20-70
+
+
+Version 1.0.0.22: 10/27/2021
+	+ Updated with Terry's latest DSP amp code, version 1.3, fixing PR hitting
+	  grill.
+
+
+Version 1.0.0.21: 10/21/2021
+	+ Updated with Terry's latest DSP amp code, version 1.2, optimized for 44.1k
+
+
+Version 1.0.0.20: 9/21/2021
+	+ Further refinements to controlling the audio clocks. Now all I2S signals to 
+	  the AZ05 are tri-stated when the nAUDIO_RESET pin is asserted from the AZ05. 
+	  This works around a hardware error where the audio clocks can back drive the 
+	  AZ05 preventing the unit from fully powering down. This is also how the HG04 
+	  works around this hardware issue.
+	+ Change I2S sync method to use Tx instead of Rx. This is also the same as the HG04.
+	+ Increase code optimization level.
+
+
+Version 1.0.0.19: 9/3/2021
+	+ Fixed audio input issue due to I2S clocks getting turned on/off upon playback 
+	  or record in Linux. All audio clocks just stay on now.
+	+ Changed default serial number to a string of binary zeros (per Yuriy’s request)
+
+
+Version 1.0.0.17: 8/25/2021
+	+ Fixed crossfader reversed, JP20-26
+	+ Enabled support for reception of MIDI running status. However transmission 
+	  of MIDI running status is not supported by the Linux build/driver, so it is 
+	  not enabled for sending MIDI to Linux. This is likely the cause of issue 
+	  JP21-26 and likely many other “issues".
+	+ Add support for Serato DJ challenge/response
+
+
+Version 1.0.0.16: 6/25/2021
+	+ Updated with Terry's latest DSP amp code, version 1.0
+
+
+Version 1.0.0.15: 6/22/2021
+	+ Fixed FX Channel Assign Master position should have 3rd byte of 0x7F, JP20-3
+	+ Fixed Platters are only sending Double Precision Absolute Controller messages, 
+	  not the messages for 3rd party, JP20-10
+	+ Fixed Cue Mix knob is not sending 0x40 when in the center detent, JP20-16
+	+ Add support for AZ05 firmware update mode on bootup by holding BCK+FWD+ENC
+
+
+Version 1.0.0.12: 5/5/2021
+	+ Initial release
+

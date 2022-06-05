@@ -1,0 +1,14 @@
+[Unit]
+Description=Firmware update for Ilitek touchscreens
+ConditionPathExists=|/sys/firmware/devicetree/base/i2c@ff160000/ili2116@41
+ConditionPathExists=|/sys/firmware/devicetree/base/i2c@ff160000/ili2117@26
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/touch-fw-upd
+StandardOutput=null
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

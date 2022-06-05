@@ -1,0 +1,18 @@
+[Unit]
+Description=Writable /var via OverlayFS
+DefaultDependencies=no
+Requires=overlayfs-setup.service
+Conflicts=umount.target
+After=overlayfs-setup.service
+Before=local-fs.target umount.target
+
+[Mount]
+What=overlay
+Where=/var
+Type=overlay
+# NOTE: If you change the paths here, they *must* also change in
+#       /etc/az01/overlayfs.conf.
+Options=lowerdir=/var,upperdir=/media/az01-internal/system/var/overlay,workdir=/media/az01-internal/system/var/.work
+
+[Install]
+WantedBy=local-fs.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Mali GPU driver setup for AZ01
+DefaultDependencies=false
+Conflicts=shutdown.target
+RequiresMountsFor=/lib
+Before=basic.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/az01-libmali-setup
+
+[Install]
+WantedBy=basic.target

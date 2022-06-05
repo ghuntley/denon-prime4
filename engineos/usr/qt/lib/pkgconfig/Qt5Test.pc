@@ -1,0 +1,13 @@
+prefix=/home/jenkins/AZ01/buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot/usr/qt
+exec_prefix=${prefix}
+libdir=/usr/qt/lib
+includedir=/usr/qt/include
+
+
+Name: Qt5 Test
+Description: Qt Unit Testing Library
+Version: 5.12.6
+Libs: -L${libdir} -lQt5Test 
+Cflags: -DQT_TESTLIB_LIB -I${includedir}/QtTest -I${includedir}
+Requires: Qt5Core
+

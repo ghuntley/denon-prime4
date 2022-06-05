@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# core dumps are now managed by az01-coredump and stored in
+# /media/az01-internal/coredumps
+rm -rf /var/lib/systemd/coredump

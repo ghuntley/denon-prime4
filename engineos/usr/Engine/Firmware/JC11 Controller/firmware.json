@@ -1,0 +1,10 @@
+{
+	"version" : "01.39",
+	"filename" : "jc11_update_01_39_121324.dfu",
+	"type" : "dfu",
+	"alt-names" : [ "@Internal Flash  /0x08000000/04*016Kg,01*064Kg,01*128Kg"],
+	"start-sysex" : ["F0 00 02 0B 7F 08 72 00 00 F7"],
+	"stop-command" : "dfu-util -a %alt% -S %serial% -s 0x08000000:1:leave -U %temp%",
+	"write-serial" : true,
+	"serial-sysex-start" : "F0 00 02 0B 00 08 79 00 10"
+}

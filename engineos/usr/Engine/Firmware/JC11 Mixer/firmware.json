@@ -1,0 +1,7 @@
+{
+	"version" : "01.48",
+	"filename" : "JC11DSP0148_08BDA893.bin",
+	"type" : "bin",
+	"start-sysex" : ["F0 00 02 0B 7F 08 74 00 01 01 F7"],
+	"deviceToFlash" : "Controller"
+}

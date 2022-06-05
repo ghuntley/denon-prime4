@@ -1,0 +1,9 @@
+[Unit]
+Description=Apply speaker DSP configuration
+Before=engine.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/alsaucm -c %i set _verb HiFi
+ExecStop=/bin/alsaucm -c %i reset

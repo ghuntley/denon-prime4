@@ -1,0 +1,11 @@
+[Unit]
+Description=Setup directories for overlayfs mounts
+RequiresMountsFor=/tmp /media/az01-internal
+DefaultDependencies=no
+Conflicts=shutdown.target
+RefuseManualStop=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/systemd-tmpfiles --create --remove /etc/az01/overlayfs.conf

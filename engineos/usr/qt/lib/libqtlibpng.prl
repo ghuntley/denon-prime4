@@ -1,0 +1,6 @@
+QMAKE_PRL_BUILD_DIR = /home/jenkins/AZ01/buildroot/output/build/air-qt-dfdb11aff4dd747272095f8349e3049fac795f8b/qt-everywhere-commercial-src/qtbase/src/3rdparty/libpng
+QMAKE_PRO_INPUT = libpng.pro
+QMAKE_PRL_TARGET = libqtlibpng.a
+QMAKE_PRL_CONFIG = lex yacc depend_includepath testcase_targets import_plugins import_qpa_plugin qt_build_extra file_copies qmake_use release link_prl incremental gdb_dwarf_index cross_compile release linux unix posix gcc cross_compile use_gold_linker compile_examples force_debug_info enable_gdb_index enable_new_dtags headersclean largefile neon nostrip prefix_build force_independent force_bootstrap utf8_source create_prl link_prl prepare_docs qt_docs_targets no_private_qt_headers_warning QTDIR_build qt_example_installs exceptions_off testcase_exceptions explicitlib static hide_symbols exceptions_off rtti_off warn_off installed c++11 strict_c++ c++14 c++1z c99 c11 hide_symbols have_target staticlib debug_info
+QMAKE_PRL_VERSION = 1.0.0
+QMAKE_PRL_LIBS = /home/jenkins/AZ01/buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot/lib/libz.so

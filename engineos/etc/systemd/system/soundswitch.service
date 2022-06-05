@@ -1,0 +1,11 @@
+[Unit]
+Description=SoundSwitch
+
+[Service]
+Type=forking
+ExecStart=/usr/SoundSwitch/Scripts/runSoundSwitch
+ExecStopPost=/usr/SoundSwitch/Scripts/cleanup
+PIDFile=/tmp/soundswitch.pid
+TimeoutStopSec=30
+Restart=always
+LimitCORE=infinity

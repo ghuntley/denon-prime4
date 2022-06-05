@@ -1,0 +1,5 @@
+ACTION=="remove", GOTO="btattach_end"
+
+SUBSYSTEM=="tty", KERNEL=="ttyS0", ENV{SYSTEMD_WANTS}+="btattach@ttyS0.service"
+
+LABEL="btattach_end"

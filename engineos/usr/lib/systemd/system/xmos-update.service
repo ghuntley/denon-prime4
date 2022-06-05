@@ -1,0 +1,13 @@
+[Unit]
+Description=Firmware update for XMOS USB audio devices
+# Only start this if I2S audio isn't available - we expect devices to have
+# one *or* the other, not both.
+ConditionPathExists=!/sys/firmware/devicetree/base/sound
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/xmosdfu --auto
+
+[Install]
+WantedBy=multi-user.target

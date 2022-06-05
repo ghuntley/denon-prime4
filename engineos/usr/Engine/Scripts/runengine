@@ -1,0 +1,19 @@
+#!/bin/sh
+
+APPNAME=`cat /sys/firmware/devicetree/base/inmusic,product-code`
+
+log()
+{
+        echo "$2"
+        logger -p user.$1 -t "$APPNAME[$$]" -- "$2"
+}
+
+log info "Setting up prerequisites..."
+/usr/Engine/Scripts/setup-prerequisites.sh $APPNAME
+
+log info "Starting application ..."
+LD_LIBRARY_PATH=/usr/qt/lib /usr/Engine/Scripts/engine $APPNAME &
+
+echo "$!" > /tmp/engine.pid
+
+log info "$APPNAME start done."

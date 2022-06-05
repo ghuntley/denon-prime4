@@ -1,0 +1,14 @@
+[Unit]
+Description=Hostname setup for AZ01
+RequiresMountsFor=/etc
+After=systemd-hostnamed.service
+Before=network-pre.target network.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/az01-setup-hostname.sh
+
+[Install]
+WantedBy=multi-user.target

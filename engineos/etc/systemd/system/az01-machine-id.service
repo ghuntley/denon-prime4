@@ -1,0 +1,15 @@
+[Unit]
+Description=Fix transient machine-id after mounting /etc
+RequiresMountsFor=/etc
+ConditionFileNotEmpty=/run/machine-id
+DefaultDependencies=no
+Conflicts=shutdown.target
+Before=systemd-tmpfiles-setup.service shutdown.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/mount -o bind,ro /run/machine-id /etc/machine-id
+
+[Install]
+WantedBy=local-fs.target

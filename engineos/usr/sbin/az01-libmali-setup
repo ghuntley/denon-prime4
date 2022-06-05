@@ -1,0 +1,23 @@
+#!/bin/sh
+
+die () {
+	test $# = 0 || printf >&2 '%s\n' "$*"
+	exit 1
+}
+
+hwrev=$(sed -ne 's/Mali-T76x.* \(r[0-9]p[0-9]\) .*$/\1/p' /sys/devices/platform/ffa30000.gpu/gpuinfo) || die 'Failed to read hwrev'
+target=$(readlink /usr/lib/libmali.so) || die 'Failed to read libmali target'
+target=$(basename "$target")
+provider=libmali-${hwrev}${target#libmali}
+
+if test -x "/usr/lib/$provider"
+then
+	printf >&2 'Overwriting libmali with %s\n' "$provider"
+
+	(
+		cd /usr/lib &&
+		mount --bind "$provider" "$target" || die 'Failed to patch Mali driver'
+	)
+else
+	printf >&2 'libmali provider %s not found, sticking with %s\n' "$provider" "$target"
+fi

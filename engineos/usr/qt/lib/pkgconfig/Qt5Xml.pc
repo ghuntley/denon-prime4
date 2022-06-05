@@ -1,0 +1,13 @@
+prefix=/home/jenkins/AZ01/buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot/usr/qt
+exec_prefix=${prefix}
+libdir=/usr/qt/lib
+includedir=/usr/qt/include
+
+
+Name: Qt5 Xml
+Description: Qt Xml module
+Version: 5.12.6
+Libs: -L${libdir} -lQt5Xml 
+Cflags: -DQT_XML_LIB -I${includedir}/QtXml -I${includedir}
+Requires: Qt5Core
+
