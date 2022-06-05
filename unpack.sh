@@ -12,7 +12,7 @@ log_fatal() {
   exit 1
 }
 
-if ! command -v dumpimage; then
+if ! command -v dumpimage >/dev/null; then
   log_fatal "You need u-boot-tools installed (dumpimage command seems to be missing)."
 fi
 
