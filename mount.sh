@@ -15,7 +15,8 @@ fi
 
 mkdir -p engineos media/az01-internal
 chmod 777 media/az01-internal
-trap 'umount -R engineos' EXIT
+# NOTE - potential backfiring possible if recursively unmounting /dev/
+trap 'umount engineos/dev; umount -R engineos' EXIT
 mount -o ro unpacked-img/rootfs.img engineos
 mount --bind /dev engineos/dev
 mount --bind media engineos/media
