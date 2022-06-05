@@ -30,13 +30,25 @@ if [ "${#files[@]}" -lt 1 ]; then
 fi
 
 for file in "${files[@]}"; do
-  log "*** Unpacking $file"
-  mkdir -p unpacked-img
-  dumpimage -l "$file"
-  dumpimage -T flat_dt -p 0 -o unpacked-img/splash.img.xz "$file"
-  xz -vd unpacked-img/splash.img.xz
-  dumpimage -T flat_dt -p 1 -o unpacked-img/recoverysplash.img.xz "$file"
-  xz -vd unpacked-img/recoverysplash.img.xz
-  dumpimage -T flat_dt -p 2 -o unpacked-img/rootfs.img.xz "$file"
-  xz -vd unpacked-img/rootfs.img.xz
+  #log "*** Extracting kernel and DTB"
+  #extract-dtb "$file" -o unpacked-img/
+
+  #for dtb in unpacked-img/*.dtb; do
+  for dtb in "$file"; do
+    log "*** Converting $dtb to DTS"
+    dtc -I dtb -O dts "$dtb" > "$dtb.dts"
+
+    log "*** Unpacking $dtb"
+    mkdir -p unpacked-img
+    dumpimage -l "$dtb"
+    dumpimage -T flat_dt -p 0 -o unpacked-img/splash.img.xz "$dtb"
+    rm unpacked-img/splash.img
+    xz -f -vd unpacked-img/splash.img.xz
+    dumpimage -T flat_dt -p 1 -o unpacked-img/recoverysplash.img.xz "$dtb"
+    rm -f unpacked-img/recoverysplash.img
+    xz -vd unpacked-img/recoverysplash.img.xz
+    dumpimage -T flat_dt -p 2 -o unpacked-img/rootfs.img.xz "$dtb"
+    rm -f unpacked-img/rootfs.img
+    xz -vd unpacked-img/rootfs.img.xz
+  done
 done
