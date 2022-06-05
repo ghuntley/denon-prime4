@@ -42,8 +42,8 @@ for file in "${files[@]}"; do
     mkdir -p unpacked-img
     dumpimage -l "$dtb"
     dumpimage -T flat_dt -p 0 -o unpacked-img/splash.img.xz "$dtb"
-    rm unpacked-img/splash.img
-    xz -f -vd unpacked-img/splash.img.xz
+    rm -f unpacked-img/splash.img
+    xz -vd unpacked-img/splash.img.xz
     dumpimage -T flat_dt -p 1 -o unpacked-img/recoverysplash.img.xz "$dtb"
     rm -f unpacked-img/recoverysplash.img
     xz -vd unpacked-img/recoverysplash.img.xz
