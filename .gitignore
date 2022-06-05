@@ -1,3 +1,5 @@
+*.exe*
 *.img*
 media/
 unpacked-img/
+updater/
