@@ -1,5 +1,10 @@
 # denon prime4 firmware research
 
+## notes
+
+* JC11 = Denon Prime 4 codename.
+* Effects unit / controller MIDI definitions are at https://github.com/ghuntley/denon-prime4/blob/trunk/engineos/usr/Engine/AssignmentFiles/PresetAssignmentFiles/JC11/JC11_Controller_Assignments.qml
+
 ## inspecting the firmware
 
 ```
@@ -70,4 +75,5 @@ lib32        linuxrc      lost+found   media        mnt          opt
 proc         root         run          sbin         srv          sys          
 tmp          usr          var          
 ```
+
 
