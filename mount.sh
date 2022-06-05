@@ -14,6 +14,7 @@ if [ ! -f unpacked-img/rootfs.img ]; then
 fi
 
 mkdir -p engineos media/az01-internal
+chmod 777 media/az01-internal
 trap 'umount -R engineos' EXIT
 mount -o ro unpacked-img/rootfs.img engineos
 mount --bind /dev engineos/dev
