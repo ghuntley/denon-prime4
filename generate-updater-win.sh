@@ -49,7 +49,11 @@ for file in "${files[@]}"; do
   for sfx_file in "${sfx[@]}"; do
     sfx_name="$(basename "$sfx_file" .sfx)"
     exe_name="${dtb_name}_${sfx_name}.exe"
+    archive_name="${dtb_name}_${sfx_name}.7z"
+    echo "*** Packing updater files"
+    7z a "$archive_name" ./updater/win*
+    trap 'rm -f "$archive_name"' EXIT
     echo "*** Generating ${exe_name} with ${sfx}"
-    7z a -sfx"${sfx_file}" "$exe_name" ./updater/win/*
+    cat "${sfx_file}" sfx-config.txt "$archive_name" >"$exe_name"
   done
 done
