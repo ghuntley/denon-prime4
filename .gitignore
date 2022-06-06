@@ -1,5 +1,7 @@
+*.7z
 *.exe*
 *.img*
+*.sfx
 buildroot/
 media/
 unpacked-img/
