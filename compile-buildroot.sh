@@ -13,5 +13,5 @@ if ! sudo ./mount.sh grep -q sshd /etc/passwd; then
   sudo ./mount.sh --write /sbin/adduser -H -S -D -G sshd -h /var/empty sshd
 fi
 sudo ./mount.sh --write sed -i 's,#PermitRootLogin .\+,PermitRootLogin yes,g' /etc/ssh/sshd_config
-sudo ./mount.sh --write chpasswd <<< 'root:denonprime4'
+sudo ./mount.sh --write /sbin/chpasswd <<< 'root:denonprime4'
 sudo ./mount.sh --write mkdir -p /var/empty
