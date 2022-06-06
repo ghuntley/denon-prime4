@@ -21,7 +21,10 @@ files=( $(find -mindepth 1 -maxdepth 1 -name \*.img ) )
 # Replaces the full data string with a reference to the extracted image file.
 patch_dts() {
   grep -v 'data = ' |\
-  sed 's,^\(\s\+\)partition = "\(.\+\)";$,\1partition = "\2";\n\1data = /incbin/("unpacked-img/\2.img.xz");,g' -u
+  sed \
+    -e 's,^\(\s\+\)partition = "\(.\+\)";$,\1partition = "\2";\n\1data = /incbin/("unpacked-img/\2.img.xz");,g' \
+    -e '/^\s\+value = <.\+>;/d' \
+    -u
 }
 
 download_firmware() {
