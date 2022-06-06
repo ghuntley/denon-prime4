@@ -44,8 +44,14 @@ for file in "${files[@]}"; do
 
   #for dtb in unpacked-img/*.dtb; do
   for dtb in "$file"; do
-    log "*** Converting $dtb to DTS, this can take a few minutes"
-    dtc -I dtb -O dts "$dtb" | patch_dts > "$dtb.dts"
+    if [ ! -f "$dtb.dts" ]
+    then
+      log "*** Converting $dtb to DTS, this can take a few minutes"
+      dtc -I dtb -O dts "$dtb" | patch_dts > "$dtb.dts"
+      continue
+    else
+      log "*** Skipping conversion of $dtb to DTS, file $dtb.dts already exists"
+    fi
 
     log "*** Unpacking $dtb"
     mkdir -p unpacked-img

@@ -28,8 +28,9 @@ on_exit() {
 trap 'on_exit' EXIT
 for img in unpacked-img/*.img; do
   log "*** Compressing $img to $img.xz"
-  xz -vk4eT0 --check=crc64 "$img"
-  files_to_delete+=("$img.xz")
+  xz -vk9eT0 --check=crc64 "$img"
+  sha1sum "$img.xz" | awk '{print $1}' | xxd -r -p >"$img.xz.sha1"
+  files_to_delete+=("$img.xz" "$img.xz.sha1")
 done
 
 for file in "${files[@]}"; do

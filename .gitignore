@@ -1,6 +1,7 @@
 *.7z
+*.dtb
 *.exe*
-*.img*
+*.img
 *.sfx
 buildroot/
 media/
