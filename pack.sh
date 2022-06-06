@@ -28,7 +28,7 @@ on_exit() {
 trap 'on_exit' EXIT
 for img in unpacked-img/*.img; do
   log "*** Compressing $img to $img.xz"
-  xz -vk9eT0 "$img"
+  xz -vk4eT0 --check=crc64 "$img"
   files_to_delete+=("$img.xz")
 done
 
