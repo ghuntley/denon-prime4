@@ -6,3 +6,9 @@ tar -c -v -C buildroot/*/output/target/ --owner=root --group=root \
 	| \
 sudo ./mount.sh --write tar -xp
 sudo ./mount.sh --write systemctl enable sshd
+if ! sudo ./mount.sh grep -q sshd /etc/group; then
+  sudo ./mount.sh --write /sbin/addgroup -S sshd
+fi
+if ! sudo ./mount.sh grep -q sshd /etc/passwd; then
+  sudo ./mount.sh --write /sbin/adduser -H -S -D -G sshd -h /var/empty sshd
+fi
