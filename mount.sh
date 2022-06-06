@@ -11,7 +11,7 @@ log_fatal() {
 
 readonly=1
 
-while [ "$#" -gt 1 ]; do
+while [ "$#" -gt 0 ]; do
   case "$1" in
   -w|--write)
     shift 1
