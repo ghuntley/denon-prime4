@@ -1,3 +1,37 @@
+# Customized Denon Prime 4 Firmware
+
+This repository contains the efforts done to create and flash custom firmware for the Denon Prime 4. This may also be relevant to other Denon DJ equipment, however the main efforts are focused on the Denon Prime 4.
+
+## Setup
+
+Steps below have only been tested on an Arch Linux system. Basic development packages (for example `build-essentials` or `base-devel` package), u-boot tools and 7-zip are required to be installed on your system.
+
+To reproduce the modified firmware with OpenSSH:
+
+1. Run `./unpack.sh` to download and unpack the original firmware package.
+2. Run `./clone-buildroot.sh` to download the matching buildroot environment via Git to the `buildroot/2021.02.10` directory.
+3. Run `./compile-buildroot.sh` to build the required toolchain and packages in buildroot. Note that this will ask for sudo access to modify the unpacked firmware images via loopback mount.
+4. Run `./pack.sh` to finally pack the modified image files back into a new firmware package. It will have a `.dtb` extension but you can rename this to `.img` and flash it directly to your hardware.
+5. Optionally run `./unpack-updater.sh` to download Denon's original Windows tool for flashing firmware via USB cable, then run `./generate-updater-win.sh` to download 7-zip's SFX module to generate a self-extracting executable based on that tool but with your own image instead.
+
+## Customizations
+
+- Use `./mount.sh` to chroot into unpacked rootfs at any time.
+- Use `./mount.sh --write` to chroot into rootfs without read-only flags set. Do your modifications and exit the shell, and it will be stored in the rootfs.
+- You can pass any command to `./mount.sh` such as `(echo YourPassword123 && echo YourPassword123) | ./mount.sh --write passwd` for scripting.
+
+## Information
+
+### Buildroot
+
+The rootfs seems to be built using Buildroot 2021.02.10 with the kernel version being `5.10.109-inmusic-2022-03-30-rt64 #1 SMP PREEMPT_RT Wed May 18 00:35:15 UTC 2022 armv7l GNU/Linux` at the time of writing this.
+
+This repository makes use of that fact to build software in an easy manner.
+
+Information below is from the original repository by @ghuntley.
+
+---
+
 # denon prime4 firmware research
 
 ## notes
@@ -79,15 +113,3 @@ lib32        linuxrc      lost+found   media        mnt          opt
 proc         root         run          sbin         srv          sys          
 tmp          usr          var          
 ```
-
-## flashing new image on prime 4
-
-Currently done by reusing Denon's original firmware flashing tool, simply replacing their original image:
-
-1. Use `./mount.sh --write` to chroot into rootfs without read-only flags set. Do your modifications and exit the shell.
-2. Create new image with `./pack.sh`.
-3. Run `./unpack-updater.sh` to fetch Denon's original updater tool.
-4. Create a self-extracting updater EXE with `./generate-updater-win.sh` or copy your new .dtb to `updater/win/` if you do not want a SFX to be generated.
-5. Boot your Denon Prime 4 into update mode by holding the Eject button while powering on the device.
-6. Execute the self-extracting EXE generated in step 4 or run `FirmwareUpdater.exe` inside `updater/win/`.
-7. Start the flashing process by clicking the green button and wait for the update to apply.
