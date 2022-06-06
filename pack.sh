@@ -27,6 +27,10 @@ on_exit() {
 }
 trap 'on_exit' EXIT
 for img in unpacked-img/*.img; do
+  if [ -f "$img.xz" ]; then
+    log "$img.xz already exists, skipping."
+    continue
+  fi
   log "*** Compressing $img to $img.xz"
   xz -vk9eT0 --check=crc64 "$img"
   sha1sum "$img.xz" | awk '{print $1}' | xxd -r -p >"$img.xz.sha1"
