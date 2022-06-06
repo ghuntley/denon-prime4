@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 ./clone-buildroot.sh
 make -C buildroot/*/ -j$(nproc)
 tar -c -v -C buildroot/*/output/target/ --owner=root --group=root \
@@ -12,4 +12,6 @@ fi
 if ! sudo ./mount.sh grep -q sshd /etc/passwd; then
   sudo ./mount.sh --write /sbin/adduser -H -S -D -G sshd -h /var/empty sshd
 fi
+sudo ./mount.sh sed -i 's,#PermitRootLogin .\+,PermitRootLogin yes,g' /etc/ssh/sshd_config
+sudo ./mount.sh chpasswd <<< 'root:denonprime4'
 sudo ./mount.sh --write mkdir -p /var/empty
