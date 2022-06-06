@@ -80,4 +80,14 @@ proc         root         run          sbin         srv          sys
 tmp          usr          var          
 ```
 
+## flashing new image on prime 4
 
+Currently done by reusing Denon's original firmware flashing tool, simply replacing their original image:
+
+1. Use `./mount.sh --write` to chroot into rootfs without read-only flags set. Do your modifications and exit the shell.
+2. Create new image with `./pack.sh`.
+3. Run `./unpack-updater.sh` to fetch Denon's original updater tool.
+4. Create a self-extracting updater EXE with `./generate-updater-win.sh` or copy your new .dtb to `updater/win/` if you do not want a SFX to be generated.
+5. Boot your Denon Prime 4 into update mode by holding the Eject button while powering on the device.
+6. Execute the self-extracting EXE generated in step 4 or run `FirmwareUpdater.exe` inside `updater/win/`.
+7. Start the flashing process by clicking the green button and wait for the update to apply.
