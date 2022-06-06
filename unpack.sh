@@ -41,7 +41,7 @@ for file in "${files[@]}"; do
 
   #for dtb in unpacked-img/*.dtb; do
   for dtb in "$file"; do
-    log "*** Converting $dtb to DTS"
+    log "*** Converting $dtb to DTS, this can take a few minutes"
     dtc -I dtb -O dts "$dtb" | patch_dts > "$dtb.dts"
 
     log "*** Unpacking $dtb"
