@@ -12,3 +12,4 @@ fi
 if ! sudo ./mount.sh grep -q sshd /etc/passwd; then
   sudo ./mount.sh --write /sbin/adduser -H -S -D -G sshd -h /var/empty sshd
 fi
+sudo ./mount.sh --write mkdir -p /var/empty
