@@ -1,5 +1,0 @@
-ACTION=="remove", GOTO="az01_power_button_end"
-
-SUBSYSTEM=="input", KERNEL=="event*", SUBSYSTEMS=="platform", DRIVERS=="gpio-keys", TAG+="systemd", ENV{SYSTEMD_WANTS}+="az01-power-button.service"
-
-LABEL="az01_power_button_end"

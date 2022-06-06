@@ -1,1 +1,0 @@
-SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ATTR{queue/scheduler}="bfq", ATTR{queue/iosched/strict_guarantees}="1"

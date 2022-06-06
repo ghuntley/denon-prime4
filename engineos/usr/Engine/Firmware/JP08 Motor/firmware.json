@@ -1,9 +1,0 @@
-{
-	"version" : "04.04",
-	"filename" : "JP08_TMS320F28034_ICYH107P08_Y4-4_0E7F.bin",
-	"type" : "bin",
-	"start-sysex": [ "F0 00 02 0B 7F 0A 74 00 01 01 F7" ],
-	"min-version" : "4.0",
-	"deviceToFlash" : "Controller",
-	"realName" : "Motor"
-}

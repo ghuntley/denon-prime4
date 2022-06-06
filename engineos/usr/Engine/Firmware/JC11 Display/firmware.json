@@ -1,8 +1,0 @@
-{
-	"version" : "00.38",
-	"filename" : "jc11_wd_update_00_38_115089.dfu",
-	"type" : "dfu",
-	"alt-names" : [ "@Internal Flash  /0x08000000/04*016Kg,01*064Kg,07*128Kg", "@Internal Flash  /0x08000000/04*016Kg,01*064Kg,03*128Kg,04*016Kg,01*064Kg,03*128Kg"],
-	"start-sysex" : ["F0 00 02 0B 10 08 72 00 00 F7", "F0 00 02 0B 30 08 72 00 00 F7"],
-	"stop-command" : "dfu-util -a %alt% -S %serial% -s 0x08000000:1:leave -U %temp%"
-}

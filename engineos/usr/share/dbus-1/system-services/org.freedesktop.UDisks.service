@@ -1,5 +1,0 @@
-[D-BUS Service]
-Name=org.freedesktop.UDisks
-Exec=/usr/libexec/udisks-daemon --no-debug
-User=root
-SystemdService=udisks.service

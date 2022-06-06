@@ -1,8 +1,0 @@
-[Unit]
-Description=AZ01 script runner service
-Requires=network.target
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/az01-script-runner

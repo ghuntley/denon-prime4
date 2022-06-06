@@ -1,6 +1,0 @@
-[Unit]
-Description=AZ01 power button emergency shutdown service
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/az01-pwrbtn

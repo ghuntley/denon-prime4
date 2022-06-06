@@ -4,6 +4,8 @@
 *.img
 *.sfx
 buildroot/
+engineos/*
+!engineos/.gitkeep
 media/
 unpacked-img/
 updater/

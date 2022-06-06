@@ -1,6 +1,0 @@
-[Unit]
-Description=AZ01 JMicron USB-SATA bridge configuration fixer
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/az01-usbsata-fixer --firmware /lib/firmware/jms578_std_v00.01.00.06_self_power.bin

@@ -1,8 +1,0 @@
-[Unit]
-Description=Disk Manager (legacy version)
-Documentation=man:udisks(7)
-
-[Service]
-Type=dbus
-BusName=org.freedesktop.UDisks
-ExecStart=/usr/libexec/udisks-daemon --no-debug
