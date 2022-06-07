@@ -28,6 +28,10 @@ The rootfs seems to be built using Buildroot 2021.02.10 with the kernel version 
 
 This repository makes use of that fact to build software in an easy manner.
 
+### Firmware update source
+
+The firmware pulls the latest firmware and its URL from https://autoupdate.airmusictech.com/PrimeUpdates.xml.
+
 Information below is from the original repository by @ghuntley.
 
 ---
