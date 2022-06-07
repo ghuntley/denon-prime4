@@ -15,6 +15,9 @@ filter_package_files() {
   grep "$filter_str" | tr ',' ' ' | awk '{print $2}'
 }
 
+# remove spaces since buildroot does not like that
+export PATH="${PATH// /}"
+
 ./clone-buildroot.sh
 make -C buildroot/*/ -j$(nproc)
 tar -c -v -C buildroot/*/output/target/ --owner=root --group=root \
