@@ -32,6 +32,48 @@ This repository makes use of that fact to build software in an easy manner.
 
 The firmware pulls the latest firmware and its URL from https://autoupdate.airmusictech.com/PrimeUpdates.xml.
 
+## Notes
+
+These are just my own notes and findings in the original firmware.
+
+- Root filesystem built with buildroot 2021.02.10 (apparently erroneously `git describe`'d in firmware as `2021.02.9-83-g1f864943a0`), so this is what I'm using for my modifications as well
+- Incomplete list of pre-installed software on PRIME 4 firmware:
+  - kmod 29 +ZSTD +XZ +ZLIB +LIBCRYPTO -EXPERIMENTAL
+  - fbset
+  - libcap 2.48
+  - libexpat 1.8.4
+  - libmali 14.0 (r1p0, without OpenCL)
+  - libopenssl 1.1
+  - libpng 16.37.0
+  - libsamplerate 0.1.8
+  - libzlib 1.2.11
+  - OpenSSL 1.1
+  - systemd 247 -PAM -AUDIT -SELINUX -IMA -APPARMOR -SMACK -SYSVINIT -UTMP -LIBCRYPTSETUP -GCRYPT +GNUTLS -ACL +XZ -LZ4 +ZSTD -SECCOMP +BLKID +ELFUTILS +KMOD -IDN2 -IDN -PCRE2 default-hierarchy=hybrid
+  - zstd 1.4.9
+  - Qt5 framework installed to /usr/qt and loaded via `LD_LIBRARY_PATH=/usr/qt/lib`
+  - …?
+- Engine
+  - Installed in /usr/Engine
+  - Referenced to as "Planck", specifically versioned as `Planck-1.2.1-3210-g1ab18eaa`
+  - This is probably the Denon-internal project name for Engine/Engine OS
+  - Seems to be built by [Jenkins](https://www.jenkins.io) and its build tag seems to be `jenkins-Planck-Embedded_Release-1188`
+- SoundSwitch
+  - Installed in /usr/SoundSwitch
+  - Referenced to simply as "SoundSwitch", specifically version with git hash `0b20b3f96a`
+- Customizations seem to have the "az01" prefix attached to file names or service names
+- There is a reference to Akai MPC hardware which is the configuration's file path for the display brightness setting
+- OS uses file system overlays for /etc and /var to redirect changes to /media/az01-internal/system/
+- Credentials for streaming services are stored in /media/az01-internal/StreamingAccounts.json
+  - Beatport LINK credentials specifically are just bare username and password
+- At least on my device, an old firmware version from 2022-03-05 seems to be stored in /media/az01-internal/az01-update.img for some reason
+- Engine app is its own systemd service (/etc/systemd/system/engine.service)
+  - actually calls a wrapper script which does device-specific setup for performance, GPU drivers, initial device values etc.
+  - Engine app itself is a Qt app called with above `LD_LIBRARY_PATH` hack
+  - Engine app renders directly to framebuffer, no X or Wayland involved or even installed on the original firmware
+  - Engine app also does the fade transition from boot logo (note the version number being displayed until Engine starts and it abruptly disappears) to the Engine UI
+- Platters, controls, sliders, etc. all provided via MIDI to the internal system. Pretty much seems to be same thing as what is done in Computer-attached mode where it's MIDI via USB.
+- Firmware update process checks the SHA-1 hashes provided for the xz-compressed images in the device tree blob. These are automatically reconstructed by my modification process.
+
 Information below is from the original repository by @ghuntley.
 
 ---
