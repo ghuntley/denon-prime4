@@ -38,8 +38,8 @@ filter_package_files() {
 # remove spaces since buildroot does not like that
 export PATH="${PATH// /}"
 
-#./clone-buildroot.sh
-#make -C buildroot/*/ -j$(nproc)
+./clone-buildroot.sh
+make -C buildroot/*/ -j$(nproc)
 tar -c -v -C buildroot/*/output/target/ --owner=root --group=root \
 	$(cat buildroot/*/output/build/packages-file-list.txt | filter_package_files) \
 	| \
