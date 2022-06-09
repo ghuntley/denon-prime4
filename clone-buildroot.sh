@@ -30,7 +30,7 @@ git init "buildroot/${VERSION_ID}"
   git checkout "${VERSION_ID}"
   patches_dir=../../buildroot-patches/"${VERSION_ID}"
   if [ -d "${patches_dir}" ]; then
-    git am "${patches_dir}"/*.patch
+    git am --committer-date-is-author-date "${patches_dir}"/*.patch
   fi
 )
 
