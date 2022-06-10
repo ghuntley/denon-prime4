@@ -55,7 +55,7 @@ export PATH="${PATH// /}"
 buildroot_path=$(echo buildroot/*/)
 buildroot_path=${buildroot_path%/}
 
-make -C buildroot/*/ -j$(nproc)
+make -C buildroot/*/ -j$(nproc) BR2_EXTERNAL=../../buildroot-customizations
 filter_package_files <"${buildroot_path}/output/build/packages-file-list.txt" | \
 tar -c -C "${buildroot_path}/output/target/" --owner=root --group=root -T - |\
 sudo ./mount.sh --write tar -xp
