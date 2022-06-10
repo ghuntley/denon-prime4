@@ -26,15 +26,24 @@ filter_package_files() {
   local package
   local filepath
   while read -r package filepath; do
+    case "$filepath" in
+    *.h|./usr/include/*|./usr/share/doc/*|./usr/share/man/*|./usr/lib/pkgconfig/*|./usr/lib/cmake/*)
+      # docs/man files/headers, skip without logging
+      continue
+      ;;
+    esac
     if is_ignored_package "$package"; then
       # file from a ignored package, skip
+      echo "Ignoring file from $package (ignored package): $filepath" >&2
       continue
     fi
     if [ ! -f "${buildroot_path}/output/target/${filepath}" ]; then
       # file is not included in actual generated rootfs (e.g. header/docs/...), skip
+      echo "Ignoring file from $package (deleted by buildroot): $filepath" >&2
       continue
     fi
     echo "$filepath"
+    echo "Adding file from $package: $filepath" >&2
   done < <(tr ',' ' ')
 }
 
@@ -47,9 +56,9 @@ buildroot_path=$(echo buildroot/*/)
 buildroot_path=${buildroot_path%/}
 
 make -C buildroot/*/ -j$(nproc)
-tar -c -v -C buildroot/*/output/target/ --owner=root --group=root \
-	$(cat buildroot/*/output/build/packages-file-list.txt | filter_package_files) \
-	| \
+tar -c -C buildroot/*/output/target/ --owner=root --group=root \
+  $(cat buildroot/*/output/build/packages-file-list.txt | filter_package_files) \
+  | \
 sudo ./mount.sh --write tar -xp
 sudo ./mount.sh --write systemctl enable sshd
 if ! sudo ./mount.sh grep -q sshd /etc/group; then
