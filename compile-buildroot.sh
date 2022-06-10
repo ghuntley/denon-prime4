@@ -32,7 +32,7 @@ filter_package_files() {
       continue
     fi
     echo "$filepath"
-  done < <(grep "$filter_str" | tr ',' ' ')
+  done < <(tr ',' ' ')
 }
 
 # remove spaces since buildroot does not like that
