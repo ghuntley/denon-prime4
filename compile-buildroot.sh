@@ -56,9 +56,8 @@ buildroot_path=$(echo buildroot/*/)
 buildroot_path=${buildroot_path%/}
 
 make -C buildroot/*/ -j$(nproc)
-tar -c -C buildroot/*/output/target/ --owner=root --group=root \
-  $(cat buildroot/*/output/build/packages-file-list.txt | filter_package_files) \
-  | \
+filter_package_files <"${buildroot_path}/output/build/packages-file-list.txt" | \
+tar -c -C "${buildroot_path}/output/target/" --owner=root --group=root -T - |\
 sudo ./mount.sh --write tar -xp
 sudo ./mount.sh --write systemctl enable sshd
 if ! sudo ./mount.sh grep -q sshd /etc/group; then
