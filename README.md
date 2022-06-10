@@ -6,6 +6,8 @@ This repository contains the efforts done to create and flash custom firmware fo
 
 Steps below have only been tested on an Arch Linux system. Basic development packages (for example `build-essentials` or `base-devel` package), u-boot tools and 7-zip are required to be installed on your system.
 
+You will also need QEMU (specifically its ARM emulation) with it registered via binfmt to execute ARM binaries. On Arch Linux this would be covered by installing `qemu-user-static` and from AUR `binfmt-qemu-static` (you could also just write the config file `binfmt-qemu-static` installs yourself).
+
 To reproduce the modified firmware with OpenSSH:
 
 1. Run `./unpack.sh` to download and unpack the original firmware package.
