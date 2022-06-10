@@ -27,7 +27,7 @@ filter_package_files() {
   local filepath
   while read -r package filepath; do
     case "$filepath" in
-    *.h|./usr/include/*|./usr/share/doc/*|./usr/share/man/*|./usr/lib/pkgconfig/*|./usr/lib/cmake/*)
+    *.h|*.la|./usr/include/*|./usr/share/doc/*|./usr/share/man/*|./usr/lib/pkgconfig/*|./usr/lib/cmake/*)
       # docs/man files/headers, skip without logging
       continue
       ;;
