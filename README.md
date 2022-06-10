@@ -96,7 +96,7 @@ Information below is from the original repository by @ghuntley.
 * static arm binaries for ssh / netcat at https://github.com/TheKikGen/MPC-LiveXplore and https://github.com/TheKikGen/MPC-LiveXplore-bootstrap
 * repacking firmware at https://github.com/TheKikGen/MPC-LiveXplore/blob/master/imgmaker/mpcimg
 * engineos library format at https://github.com/mixxxdj/mixxx/wiki/Engine-Library-Format
-
+* beatinfo protocl information at https://github.com/MarByteBeep/StageLinq/discussions/12
 
 ## inspecting the firmware
 
