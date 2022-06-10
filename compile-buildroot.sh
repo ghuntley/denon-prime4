@@ -13,6 +13,7 @@ while read -r package; do
 done <package-ignorelist.txt
 
 is_ignored_package() {
+  local package
   for package in "${ignored_packages[@]}"; do
     if [ "$package" = "$1" ]; then
       return 0
@@ -22,6 +23,8 @@ is_ignored_package() {
 }
 
 filter_package_files() {
+  local package
+  local filepath
   while read -r package filepath; do
     if is_ignored_package "$package"; then
       # file from a ignored package, skip
