@@ -27,7 +27,7 @@ filter_package_files() {
       # file from a ignored package, skip
       continue
     fi
-    if [ ! -f buildroot/*/output/target/"$filepath" ]; then
+    if [ ! -f "${buildroot_path}/output/target/${filepath}" ]; then
       # file is not included in actual generated rootfs (e.g. header/docs/...), skip
       continue
     fi
@@ -39,6 +39,10 @@ filter_package_files() {
 export PATH="${PATH// /}"
 
 ./clone-buildroot.sh
+
+buildroot_path=$(echo buildroot/*/)
+buildroot_path=${buildroot_path%/}
+
 make -C buildroot/*/ -j$(nproc)
 tar -c -v -C buildroot/*/output/target/ --owner=root --group=root \
 	$(cat buildroot/*/output/build/packages-file-list.txt | filter_package_files) \
